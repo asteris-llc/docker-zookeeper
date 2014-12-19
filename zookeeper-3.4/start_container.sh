@@ -33,8 +33,8 @@ CONTAINER_NAME="${CONSUL_SERVICE}-${ZK_ENV}-${ZK_CLUSTER_ID}-${ZK_ID}"
 NODE=$(hostname -s)
 
 docker run -d --name ${CONTAINER_NAME} \
+             --link consul:consul \
              ${PORTS}  \
-             -e CONSUL_CONNECT="node1:8500" \
              -e ZK_ID="${ZK_ID}" \
              -e CONSUL_QUERY="${CONSUL_QUERY}" \
              -e SERVICE_2181_NAME="${CONSUL_SERVICE}" \
