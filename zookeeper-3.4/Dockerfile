@@ -8,7 +8,7 @@ ENV ZK_LOG_DIR /var/log/zookeeper
 
 ENV CONSUL_TEMPLATE_VERSION 0.4.0
 
-RUN yum -y install tar wget  && \
+RUN yum -y install nmap-ncat tar wget  && \
     yum clean all
 
 RUN wget -q https://github.com/hashicorp/consul-template/releases/download/v${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tar.gz && \
