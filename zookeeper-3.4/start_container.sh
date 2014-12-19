@@ -30,17 +30,19 @@ CONSUL_QUERY=${CONSUL_QUERY:-"${ZK_CLUSTER_ID}.${CONSUL_SERVICE}"}
 
 CONTAINER_NAME="${CONSUL_SERVICE}-${ZK_ENV}-${ZK_CLUSTER_ID}-${ZK_ID}"
 
+NODE=$(hostname -s)
+
 docker run -d --name ${CONTAINER_NAME} \
-             --link consul:consul \
              ${PORTS}  \
+             -e CONSUL_CONNECT="node1:8500" \
              -e ZK_ID="${ZK_ID}" \
              -e CONSUL_QUERY="${CONSUL_QUERY}" \
              -e SERVICE_2181_NAME="${CONSUL_SERVICE}" \
-             -e SERVICE_2181_ID="$(hostname -s):${CONTAINER_NAME}:2181:zkid-${ZK_ID}" \
+             -e SERVICE_2181_ID="${NODE}:${CONTAINER_NAME}:2181:zkid-${ZK_ID}" \
              -e SERVICE_2888_NAME="${CONSUL_SERVICE}-2888" \
-             -e SERVICE_2888_ID="$(hostname -s):${CONTAINER_NAME}:2888:zkid-${ZK_ID}" \
+             -e SERVICE_2888_ID="${NODE}:${CONTAINER_NAME}:2888:zkid-${ZK_ID}" \
              -e SERVICE_3888_NAME="${CONSUL_SERVICE}-3888" \
-             -e SERVICE_3888_ID="$(hostname -s):${CONTAINER_NAME}:3888:zkid-${ZK_ID}" \
+             -e SERVICE_3888_ID="${NODE}:${CONTAINER_NAME}:3888:zkid-${ZK_ID}" \
              -e SERVICE_TAGS="${SERVICE_TAGS},${ZK_ENV},${ZK_CLUSTER_ID},zkid-${ZK_ID}" \
                 ${DOCKER_IMAGE}
 
