@@ -28,7 +28,7 @@ CONSUL_SERVICE=${CONSUL_SERVICE:-"zookeeper"}
 # for example {{ range "cluster1.zookeeper" }}
 CONSUL_QUERY=${CONSUL_QUERY:-"${ZK_CLUSTER_ID}.${CONSUL_SERVICE}"}
 
-CONTAINER_NAME="${SERVICE_NAME}-${ZK_ENV}-${ZK_CLUSTER_ID}-${ZK_ID}"
+CONTAINER_NAME="${CONSUL_SERVICE}-${ZK_ENV}-${ZK_CLUSTER_ID}-${ZK_ID}"
 
 docker run -d --name ${CONTAINER_NAME} \
              --link consul:consul \
