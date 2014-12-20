@@ -17,6 +17,21 @@ Features
 - Will generate random ZKIDs if one is not provided
 - Supports tagging for use with registrator and consul service discovery
 
+
+Building
+--------
+
+This image is available in the Docker hub as `asteris/zookeeper:latest`. To build your own use the included Makefile. You can override any of the `NAME`, `REPO` or `TAG`:
+
+
+    cd zookeeper-3.4
+    NAME=zk make -e
+    REPO=mycompany NAME=zk TAG=test make -e tag
+
+Pushing to the Docker hub:
+
+	REPO=mycompany NAME=zk TAG=test make -e push
+
 Running 
 ------
 ### From the command line
@@ -35,7 +50,10 @@ Running
 
 - If you want to use Consul DNS instead of container linking, replace the `--link consul:consul` line in the script with a `CONSUL_CONNECT` pointing to the dns name of the consul system
 
-###Environment variables
+
+
+Environment variables
+---------------------
 
 | Variable | Default | Description |
 | -------- | ------- | ----------- |
