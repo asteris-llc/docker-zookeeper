@@ -6,7 +6,7 @@ ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_DATA_DIR /var/lib/zookeeper
 ENV ZK_LOG_DIR /var/log/zookeeper
 
-ENV CONSUL_TEMPLATE_VERSION 0.5.1
+ENV CONSUL_TEMPLATE_VERSION 0.6.0
 
 RUN yum -y install nmap-ncat tar wget  && \
     yum clean all
