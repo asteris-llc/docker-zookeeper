@@ -34,11 +34,6 @@ else
   CONSUL_QUERY="${CONSUL_TAG}.${CONSUL_SERVICE}" 
 fi
 
-#HACK: Consul template as of 0.4.0 doesn't have variable support
-# see :
-# https://github.com/hashicorp/consul-template/issues/66#issuecomment-62312499
-sed -e "s/%CONSUL_QUERY%/$CONSUL_QUERY/g" ${TEMPLATE_DIR}/zoo.env.sed > ${TEMPLATE_DIR}/zoo.env.tmpl
-
 ${CONSUL_TEMPLATE} -consul ${CONSUL_CONNECT} \
                    -wait ${CONSUL_MINWAIT}:${CONSUL_MAXWAIT} \
                    -template ${TEMPLATE_DIR}/zoo.env.tmpl:${ZK_HOME}/conf/zoo.env:${RESTART_COMMAND}  
