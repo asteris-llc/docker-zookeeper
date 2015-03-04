@@ -19,8 +19,8 @@ CONSUL_SERVICE=${CONSUL_SERVICE:-zookeeper}
 
 #If we have consul-template update immediately, we 
 #get into a start/stop cycle with all the zk procs
-CONSUL_MINWAIT=${CONSUL_MINWAIT:-20s}
-CONSUL_MAXWAIT=${CONSUL_MAXWAIT:-60s}
+CONSUL_MINWAIT=${CONSUL_MINWAIT:-4s}
+CONSUL_MAXWAIT=${CONSUL_MAXWAIT:-20s}
 
 CONSUL_TEMPLATE=/usr/local/bin/consul-template
 TEMPLATE_DIR=templates
