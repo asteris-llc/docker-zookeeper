@@ -13,6 +13,11 @@ export ZK_ID=${ZK_ID:-1}
 
 export ZK_HOME=${ZK_HOME:-/opt/zookeeper}
 
+#ZK super user
+ZK_SUPER_USER=${ZK_SUPER_USER:-super}
+ZK_SUPER_PW=${ZK_SUPER_PW:-}
+
+
 #Consul server
 CONSUL_CONNECT=${CONSUL_CONNECT:-"consul:8500"}
 CONSUL_SERVICE=${CONSUL_SERVICE:-zookeeper}
@@ -21,6 +26,12 @@ CONSUL_SERVICE=${CONSUL_SERVICE:-zookeeper}
 #get into a start/stop cycle with all the zk procs
 CONSUL_MINWAIT=${CONSUL_MINWAIT:-4s}
 CONSUL_MAXWAIT=${CONSUL_MAXWAIT:-20s}
+
+args=()
+#Optional: Set up auth to consul server
+[[ -n "${CONSUL_TOKEN}" ]]        && args+=" -token ${CONSUL_TOKEN}" 
+[[ -n "${CONSUL_USE_SSL}" ]]      && args+=" -ssl ${CONSUL_USE_SSL}"
+[[ -n "${CONSUL_VERIFY_SSL}" ]]   && args+=" -ssl-verify ${CONSUL_VERIFY_SSL}" 
 
 CONSUL_TEMPLATE=/usr/local/bin/consul-template
 TEMPLATE_DIR=templates
@@ -36,4 +47,4 @@ fi
 
 ${CONSUL_TEMPLATE} -consul ${CONSUL_CONNECT} \
                    -wait ${CONSUL_MINWAIT}:${CONSUL_MAXWAIT} \
-                   -template ${TEMPLATE_DIR}/zoo.env.tmpl:${ZK_HOME}/conf/zoo.env:${RESTART_COMMAND}  
+                   -template ${TEMPLATE_DIR}/zoo.env.tmpl:${ZK_HOME}/conf/zoo.env:${RESTART_COMMAND} $args $@ 
