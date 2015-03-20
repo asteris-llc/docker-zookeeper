@@ -29,9 +29,9 @@ CONSUL_MAXWAIT=${CONSUL_MAXWAIT:-20s}
 
 args=()
 #Optional: Set up auth to consul server
-[[ -n "${CONSUL_TOKEN}" ]]        && args+=" -token ${CONSUL_TOKEN}" 
-[[ -n "${CONSUL_USE_SSL}" ]]      && args+=" -ssl ${CONSUL_USE_SSL}"
-[[ -n "${CONSUL_VERIFY_SSL}" ]]   && args+=" -ssl-verify ${CONSUL_VERIFY_SSL}" 
+[[ -n "${CONSUL_TOKEN}" ]]        && args+=" -token ${CONSUL_TOKEN}"
+[[ -n "${CONSUL_SSL}" ]]          && args+=" -ssl ${CONSUL_SSL}"
+[[ -n "${CONSUL_SSL_VERIFY}" ]]   && args+=" -ssl-verify ${CONSUL_SSL_VERIFY}"
 
 CONSUL_TEMPLATE=/usr/local/bin/consul-template
 TEMPLATE_DIR=templates
