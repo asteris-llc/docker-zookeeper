@@ -21,6 +21,18 @@ ZOO_CFG=${ZOO_CFG:-/opt/zookeeper/conf/zoo.cfg}
 ZK_ID=${ZK_ID:-1}
 MYID_FILE=${MYID_FILE:-/var/lib/zookeeper/myid}
 
+# Did we ask for a super user?
+ZK_SUPER_USER=${ZK_SUPER_USER:-super}
+ZK_SUPER_PW=${ZK_SUPER_PW:-}
+
+ZK_SUPER_CLASS="zookeeper.DigestAuthenticationProvider.superDigest"
+super_args=""
+
+# Create a digest for zk from a password
+create_digest_pw() {
+    java -cp "/opt/zookeeper/*:/opt/zookeeper/lib/*"  org.apache.zookeeper.server.auth.DigestAuthenticationProvider ${ZK_SUPER_USER}:${ZK_SUPER_PW} | awk -F '->' '{print $2}'
+}
+
 write_settings() {
     cp /opt/zookeeper/conf/zoo_sample.cfg ${ZOO_CFG} 
     echo "dataDir=${ZK_DATA_DIR}" >> ${ZOO_CFG}
@@ -65,8 +77,14 @@ check_vars () {
    fi
 }
 
+#If a password was set, add it to the start args
+if [ ! -z "${ZK_SUPER_PW}" ]; then
+   digest=$(create_digest_pw)
+   JVMFLAGS+=" -D${ZK_SUPER_CLASS}=$digest "
+fi
+
 write_settings
 check_vars
 write_zkid
 
-/opt/zookeeper/bin/zkServer.sh restart 
+/opt/zookeeper/bin/zkServer.sh ${super_args} restart 
