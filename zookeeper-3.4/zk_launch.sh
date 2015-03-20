@@ -87,4 +87,4 @@ write_settings
 check_vars
 write_zkid
 
-/opt/zookeeper/bin/zkServer.sh ${super_args} restart 
+/opt/zookeeper/bin/zkServer.sh restart 
