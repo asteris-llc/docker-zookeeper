@@ -80,11 +80,12 @@ check_vars () {
 #If a password was set, add it to the start args
 if [ ! -z "${ZK_SUPER_PW}" ]; then
    digest=$(create_digest_pw)
-   JVMFLAGS+=" -D${ZK_SUPER_CLASS}=$digest "
+   export JVMFLAGS+=" -D${ZK_SUPER_CLASS}=$digest "
 fi
 
 write_settings
 check_vars
 write_zkid
+
 
 /opt/zookeeper/bin/zkServer.sh restart 
