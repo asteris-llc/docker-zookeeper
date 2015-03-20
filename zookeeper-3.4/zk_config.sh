@@ -13,6 +13,10 @@ export ZK_ID=${ZK_ID:-1}
 
 export ZK_HOME=${ZK_HOME:-/opt/zookeeper}
 
+#ZK super user
+ZK_SUPER_USER=${ZK_SUPER_USER:-super}
+ZK_SUPER_PW=${ZK_SUPER_PW:-}
+
 
 #Consul server
 CONSUL_CONNECT=${CONSUL_CONNECT:-"consul:8500"}
