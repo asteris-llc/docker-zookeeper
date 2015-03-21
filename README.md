@@ -10,13 +10,14 @@ Warning! This is a test of consul-template. Don't use for anything important at 
 
 Features
 --------
+- Based on [Alpine Linux](http://alpinelinux.org) for a smaller image size (~200mb)
 - Uses [consul-template](https://github.com/hashicorp/consul-template.git) to dynamicaly write zoo.cfg and restart Zookeeper
 - Supplies environment variables for [registrator](https://github.com/progrium/registrator) for service discovery
 - Configurable via environment variables passed to container
 - Supports docker-assigned ports for client, peer and leaders (you can run multiple zookeepers on the same machine without port conflicts)
 - Will generate random ZKIDs if one is not provided
 - Supports tagging for use with registrator and consul service discovery
-
+- Includes a [cli](https://github.com/davidledwards/zookeeper/tree/master/zookeeper-cli) for managing zookeeper znodes and acls 
 
 Building
 --------
