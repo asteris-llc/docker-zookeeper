@@ -42,5 +42,4 @@ WORKDIR /opt/zookeeper
 VOLUME ["/var/lib/zookeeper", "/var/log/zookeeper"]
 
 ENTRYPOINT ["zk_config.sh"]
-CMD ["start-foreground"]
 
