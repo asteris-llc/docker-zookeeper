@@ -47,4 +47,4 @@ fi
 
 ${CONSUL_TEMPLATE} -consul ${CONSUL_CONNECT} \
                    -wait ${CONSUL_MINWAIT}:${CONSUL_MAXWAIT} \
-                   -template ${TEMPLATE_DIR}/zoo.env.tmpl:${ZK_HOME}/conf/zoo.env:${RESTART_COMMAND} $args $@ 
+                   $args -template ${TEMPLATE_DIR}/zoo.env.tmpl:${ZK_HOME}/conf/zoo.env:${RESTART_COMMAND} $@ 
