@@ -31,7 +31,7 @@ args=()
 #Optional: Set up auth to consul server
 [[ -n "${CONSUL_TOKEN}" ]]        && args+=" -token ${CONSUL_TOKEN}"
 [[ -n "${CONSUL_SSL}" ]]          && args+=" -ssl"
-[[ -n "${CONSUL_SSL_VERIFY}" ]]   && args+=" -ssl-verify ${CONSUL_SSL_VERIFY}"
+[[ -n "${CONSUL_SSL_VERIFY}" ]]   && args+=" -ssl-verify=${CONSUL_SSL_VERIFY}"
 
 CONSUL_TEMPLATE=/usr/local/bin/consul-template
 TEMPLATE_DIR=templates
