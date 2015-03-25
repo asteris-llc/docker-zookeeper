@@ -12,4 +12,4 @@ set -e
 
 ZK_SERVER=${ZK_SERVER:-"localhost:2181"}
 
-printf "addauth digest ${ZK_AUTH}\nsetAcl ${ZNODE} ${ZNODE_ACL}\n" | /opt/zookeeper/bin/zkCli.sh -server ${ZK_SERVER}
+printf "addauth digest ${ZK_AUTH}\n\ncreate ${ZNODE} \"\"\nsetAcl ${ZNODE} ${ZNODE_ACL}\n" | /opt/zookeeper/bin/zkCli.sh -server ${ZK_SERVER}
