@@ -1,4 +1,4 @@
-FROM asteris/java:centos7_java7
+FROM asteris/consul-template:latest
 
 MAINTAINER Steven Borrelli <steve@aster.is>
 
@@ -6,15 +6,11 @@ ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_DATA_DIR /var/lib/zookeeper
 ENV ZK_LOG_DIR /var/log/zookeeper
 
-ENV CONSUL_TEMPLATE_VERSION 0.8.0
+RUN apk-install bash openjdk7-jre
 
-RUN yum -y install nmap-ncat tar wget  && \
-    yum clean all
+ADD templates /consul-template/templates/
 
-RUN wget -q https://github.com/hashicorp/consul-template/releases/download/v${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tar.gz && \
-    tar zxvf consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tar.gz && \
-    mv consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64/consul-template  /usr/local/bin/consul-template && \
-    chmod +x /usr/local/bin/consul-template
+RUN mkdir -p /opt
 
 RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz | tar -xzf - -C /opt \
     && mv /opt/zookeeper-$ZOOKEEPER_VERSION /opt/zookeeper \
@@ -28,10 +24,6 @@ EXPOSE 2181 2888 3888
 COPY zk_config.sh /usr/local/bin/
 COPY zk_launch.sh /usr/local/bin/
 COPY setacl.sh /usr/local/bin/
-
-RUN  mkdir -p  /opt/zookeeper/templates
-
-COPY templates /opt/zookeeper/templates/
 
 WORKDIR /opt/zookeeper
 
