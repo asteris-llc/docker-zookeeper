@@ -14,7 +14,7 @@ export ZK_LOG_DIR=${ZK_LOG_DIR:-/var/log/zookeeper}
 #For log4j:
 export ZOO_LOG_DIR=${ZOO_LOG_DIR:-${ZK_LOG_DIR}}
 
-ZOO_CFG_TEMPLATE=${ZOO_CFG_TEMPLATE:-"/opt/zookeeper/templates/zoo.cfg.tmpl"}
+ZOO_CFG_TEMPLATE=${ZOO_CFG_TEMPLATE:-"/consul-template/templates/zoo.cfg.tmpl"}
 
 ZOO_CFG=${ZOO_CFG:-/opt/zookeeper/conf/zoo.cfg}
 
