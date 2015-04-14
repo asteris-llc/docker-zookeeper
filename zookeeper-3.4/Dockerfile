@@ -17,7 +17,7 @@ RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-$ZOOKEEPER_V
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /tmp/zookeeper
 
-ENV JAVA_HOME /usr/lib/jvm/java
+ENV JAVA_HOME /usr/lib/jvm/default-jvm
 
 EXPOSE 2181 2888 3888
 
