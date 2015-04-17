@@ -34,7 +34,7 @@ args=()
 [[ -n "${CONSUL_SSL_VERIFY}" ]]   && args+=" -ssl-verify=${CONSUL_SSL_VERIFY}"
 
 CONSUL_TEMPLATE=/usr/local/bin/consul-template
-TEMPLATE_DIR=templates
+TEMPLATE_DIR=/consul-template/templates
 
 RESTART_COMMAND=zk_launch.sh
 
