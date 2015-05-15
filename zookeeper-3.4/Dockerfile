@@ -24,6 +24,7 @@ EXPOSE 2181 2888 3888
 COPY zk_config.sh /usr/local/bin/
 COPY zk_launch.sh /usr/local/bin/
 COPY setacl.sh /usr/local/bin/
+COPY java.env /opt/zookeeper/conf/java.env
 
 WORKDIR /opt/zookeeper
 
